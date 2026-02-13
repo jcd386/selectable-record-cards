@@ -1,0 +1,13 @@
+.sfdx/
+.sf/
+.localdevserver/
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+node_modules/
+*.swp
+*.swo
+*~

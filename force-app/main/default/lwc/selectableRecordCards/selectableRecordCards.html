@@ -1,0 +1,60 @@
+<template>
+    <!-- Header Section -->
+    <div class="slds-p-around_small">
+        <h3 class="slds-text-heading_small slds-m-bottom_x-small">
+            {headerText}
+        </h3>
+        <template if:false={selectionLocked}>
+            <p class="slds-text-body_small slds-text-color_weak">
+                {subHeaderText}
+            </p>
+        </template>
+        <template if:true={selectionLocked}>
+            <div class="loading-indicator">
+                <lightning-spinner alternative-text="Processing" size="x-small"></lightning-spinner>
+                <span class="slds-text-body_small slds-text-color_weak slds-m-left_x-small">Processing…</span>
+            </div>
+        </template>
+    </div>
+
+    <!-- Records Display -->
+    <template if:true={hasRecords}>
+        <div class="slds-p-around_small">
+            <!-- Card Grid Container -->
+            <div class="card-grid">
+                <template for:each={allRecordsWithState} for:item="item">
+                    <!-- Individual Card -->
+                    <div key={item.key}
+                         class={item.cardClass}
+                         style={item.cardStyle}
+                         data-record-id={item.recordId}
+                         onclick={handleCardClick}
+                         role="button"
+                         tabindex="0"
+                         aria-label={item.ariaLabel}
+                         aria-pressed={item.isSelected}>
+
+                        <span class="display-value slds-truncate"
+                              title={item.displayValue}>
+                            {item.displayValue}
+                        </span>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <!-- Empty State -->
+    <template if:false={hasRecords}>
+        <div class="slds-p-around_medium slds-text-align_center">
+            <lightning-icon
+                icon-name="utility:info"
+                size="small"
+                alternative-text="No records">
+            </lightning-icon>
+            <p class="slds-m-top_small slds-text-body_regular">
+                No records to display
+            </p>
+        </div>
+    </template>
+</template>

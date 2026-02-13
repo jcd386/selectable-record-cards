@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Selectable Record Cards</masterLabel>
+    <description>Display records as selectable cards with toggle selection for Screen Flows. Works with any Salesforce object.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <!-- Generic type: Flow Builder will prompt admin to select the object -->
+            <propertyType name="T" extends="SObject" label="Object Type" description="The Salesforce object type for the record collections" />
+
+            <!-- Input: Selected records collection -->
+            <property name="selectedRecords"
+                      type="{T[]}"
+                      role="inputOnly"
+                      label="Selected Records (Input)"
+                      description="Collection of records that should be pre-selected" />
+
+            <!-- Input: Unselected records collection -->
+            <property name="unselectedRecords"
+                      type="{T[]}"
+                      role="inputOnly"
+                      label="Unselected Records (Input)"
+                      description="Collection of records that are not selected" />
+
+            <!-- Input: Selected card color (hex) -->
+            <property name="selectedColor"
+                      type="String"
+                      role="inputOnly"
+                      label="Selected Card Color"
+                      description="Hex color for selected cards (e.g., #0070d2). Defaults to blue."
+                      default="#53c4ee" />
+
+            <!-- Input: Unselected card color (hex) -->
+            <property name="unselectedColor"
+                      type="String"
+                      role="inputOnly"
+                      label="Unselected Card Color"
+                      description="Hex color for unselected cards (e.g., #ecebea). Defaults to light gray."
+                      default="#ecebea" />
+
+            <!-- Input: Card minimum width in pixels -->
+            <property name="cardMinWidth"
+                      type="String"
+                      role="inputOnly"
+                      label="Card Min Width (px)"
+                      description="Minimum card width in pixels. Defaults to 100."
+                      default="100" />
+
+            <!-- Input: Card maximum width in pixels -->
+            <property name="cardMaxWidth"
+                      type="String"
+                      role="inputOnly"
+                      label="Card Max Width (px)"
+                      description="Maximum card width in pixels. Defaults to 200."
+                      default="200" />
+
+            <!-- Input: Card font size in pixels -->
+            <property name="cardFontSize"
+                      type="String"
+                      role="inputOnly"
+                      label="Card Font Size (px)"
+                      description="Font size for card text in pixels. Defaults to 13."
+                      default="13" />
+
+            <!-- Input: Header text -->
+            <property name="headerText"
+                      type="String"
+                      role="inputOnly"
+                      label="Header Text"
+                      description="Heading displayed above the cards. Defaults to 'Select Records'."
+                      default="Select Records" />
+
+            <!-- Input: Sub-header text -->
+            <property name="subHeaderText"
+                      type="String"
+                      role="inputOnly"
+                      label="Sub-Header Text"
+                      description="Helper text displayed below the heading. Defaults to 'Click cards to toggle selection'."
+                      default="Click cards to toggle selection" />
+
+            <!-- Input: Lock selection (prevent toggling) -->
+            <property name="selectionLocked"
+                      type="Boolean"
+                      role="inputOnly"
+                      label="Lock Selection"
+                      description="When true, cards cannot be selected or deselected. Useful for temporarily disabling interaction."
+                      default="false" />
+
+            <!-- Input: Field to display on cards -->
+            <property name="displayFieldApiName"
+                      type="String"
+                      role="inputOnly"
+                      label="Display Field API Name"
+                      description="API name of field to display on each card (e.g., Name, Email, Title)"
+                      required="true"
+                      default="Name" />
+
+            <!-- Output: Currently selected records -->
+            <property name="currentlySelected"
+                      type="{T[]}"
+                      role="outputOnly"
+                      label="Currently Selected Records (Output)"
+                      description="Real-time collection of selected records" />
+
+            <!-- Output: Currently unselected records -->
+            <property name="currentlyUnselected"
+                      type="{T[]}"
+                      role="outputOnly"
+                      label="Currently Unselected Records (Output)"
+                      description="Real-time collection of unselected records" />
+
+            <!-- Output: Most recently toggled record ID -->
+            <property name="lastToggledId"
+                      type="String"
+                      role="outputOnly"
+                      label="Last Toggled Record ID"
+                      description="The record ID of the most recently selected or deselected card" />
+
+            <!-- Output: Whether the last toggle was a selection -->
+            <property name="lastToggledWasSelected"
+                      type="Boolean"
+                      role="outputOnly"
+                      label="Last Toggle Was Selected"
+                      description="True if the last toggled record was selected, false if deselected" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
